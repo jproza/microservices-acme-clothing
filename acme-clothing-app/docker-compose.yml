@@ -26,6 +26,7 @@ services:
       dockerfile: acme-clothing-app/Dockerfile
     image: jproza/acme-clothing
     container_name: acme-clothing
+    hostname: localhost
     restart: on-failure
     links:
       - mongodb
@@ -41,6 +42,7 @@ services:
       - SPRING_DATA_MONGODB_PORT=27017
     networks:
       - main-network
+    command: ["--bind_ip", "0.0.0.0"]
 
 
   api-gateway:
@@ -60,7 +62,8 @@ services:
       - 9191:9191
     environment:
       - SERVER_PORT=9191
-
+    networks:
+      - main-network
 
   discovery-server:
     build:
@@ -73,7 +76,8 @@ services:
       - 8761:8761
     environment:
       - SERVER_PORT=8761
-
+    networks:
+      - main-network
 
 networks:
   main-network:

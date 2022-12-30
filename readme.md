@@ -19,9 +19,13 @@ https://access.redhat.com/documentation/en-us/red_hat_container_development_kit/
 
 as manual installation
 
-
+.build
 docker
 docker login
+docker build -t jproza/acme-api-gateway .
+docker build -t jproza/acme-api-gateway .
+docker build -t jproza/acme-api-gateway .
+
 docker push jproza/acme-clothing
 brew install --cask docker
 (https://stackoverflow.com/questions/44084846/cannot-connect-to-the-docker-daemon-on-macos)
