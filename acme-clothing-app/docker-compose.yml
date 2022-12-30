@@ -4,7 +4,6 @@ volumes:
   data:
     driver: local
 
-
 services:
   mongodb:
     image: mongo:4.4
@@ -12,13 +11,9 @@ services:
     hostname: localhost
     restart: unless-stopped
     ports:
-      - $MONGO_HOST_PORT:27017
+      - 27017:27017
     environment:
-      #- MONGO_INITDB_ROOT_USERNAME=$MONGO_ROOT_USERNAME
-      #- MONGO_INITDB_ROOT_PASSWORD=$MONGO_ROOT_PASSWORD
       - MONGO_INITDB_DATABASE=$MONGO_DB
-      #- MONGO_DB_USERNAME=$MONGO_DB_USERNAME
-      #- MONGO_DB_PASSWORD=$MONGO_DB_PASSWORD
     volumes:
       - data:/opt/homebrew/var/mongodb
     networks:
@@ -29,29 +24,57 @@ services:
     build:
       context: ..
       dockerfile: acme-clothing-app/Dockerfile
-    image: $APP_NAME
-    container_name: $APP_NAME
+    image: jproza/acme-clothing
+    container_name: acme-clothing
     restart: on-failure
     links:
       - mongodb
     depends_on:
       - mongodb
     ports:
-      - $SERVER_HOST_PORT:8000
+      - 8080:8080
     environment:
-      - SERVER_PORT=8000
+      - SERVER_PORT=8080
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_APPLICATION_NAME=$APP_NAME
-#      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=$MONGO_DB
-#      - SPRING_DATA_MONGODB_AUTO_INDEX_CREATION=$MONGO_AUTO_INDEX_CREATION
       - SPRING_DATA_MONGODB_HOST=mongodb
       - SPRING_DATA_MONGODB_PORT=27017
-#      - SPRING_DATA_MONGODB_USERNAME=$MONGO_DB_USERNAME
-#      - SPRING_DATA_MONGODB_PASSWORD=$MONGO_DB_PASSWORD
-#      - SPRING_DATA_MONGODB_DATABASE=$MONGO_DB
     networks:
       - main-network
 
+
+  api-gateway:
+    build:
+      context: ..
+      dockerfile: api-gateway/Dockerfile
+    image: jproza/acme-api-gateway
+    container_name: api-gateway
+    restart: on-failure
+    links:
+      - discovery-server
+      - web
+    depends_on:
+      - web
+      - discovery-server
+    ports:
+      - 9191:9191
+    environment:
+      - SERVER_PORT=9191
+
+
+  discovery-server:
+    build:
+      context: ..
+      dockerfile: discovery-server/Dockerfile
+    image: jproza/discovery-server
+    container_name: discovery
+    restart: on-failure
+    ports:
+      - 8761:8761
+    environment:
+      - SERVER_PORT=8761
+
+
 networks:
   main-network:
-      name: $NETWORK_NAME
+    name: $NETWORK_NAME
