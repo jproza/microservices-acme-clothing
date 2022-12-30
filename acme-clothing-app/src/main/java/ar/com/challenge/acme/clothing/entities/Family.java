@@ -23,7 +23,7 @@ public class Family {
     private String name;
     @NotBlank
     @NotNull
-    private List<Wear> nodes = new ArrayList<>();
+    private List<Product> nodes = new ArrayList<>();
 
     public String getId(){
         return id.toHexString();

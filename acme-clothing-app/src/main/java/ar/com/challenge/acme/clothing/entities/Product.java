@@ -16,12 +16,12 @@ import java.util.Random;
 
 
 //=Producto
-@Document("Wears")
+@Document("products")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Wear {
+public class Product {
 
 
   @Id

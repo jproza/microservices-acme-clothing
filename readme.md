@@ -18,7 +18,7 @@ run in order:
 https://access.redhat.com/documentation/en-us/red_hat_container_development_kit/3.0/html/installation_guide/docker-machine-driver-install
 
 as manual installation
-
+brew services restart mongodb-community
 .build
 docker
 docker login

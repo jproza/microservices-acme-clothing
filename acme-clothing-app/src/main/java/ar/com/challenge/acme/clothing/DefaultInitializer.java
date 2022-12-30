@@ -1,6 +1,6 @@
 package ar.com.challenge.acme.clothing;
 
-import ar.com.challenge.acme.clothing.entities.Wear;
+import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.repository.CatalogueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,37 +21,37 @@ public class DefaultInitializer implements CommandLineRunner {
 
     log.info("Starting app initialization ...");
 
-    Wear wear = new Wear();
-    wear.setNombre("Catalogue1");
-    catalogueRepository.save(wear);
+    Product product = new Product();
+    product.setNombre("Catalogue1");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue2");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue2");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue3");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue3");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue4");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue4");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue5");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue5");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue6");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue6");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue7");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue7");
+    catalogueRepository.save(product);
 
-    wear = new Wear();
-    wear.setNombre("Catalogue9");
-    catalogueRepository.save(wear);
+    product = new Product();
+    product.setNombre("Catalogue9");
+    catalogueRepository.save(product);
 
     log.info("... finished app initialization");
 

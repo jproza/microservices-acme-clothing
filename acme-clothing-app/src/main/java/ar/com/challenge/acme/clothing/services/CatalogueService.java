@@ -1,75 +1,69 @@
 package ar.com.challenge.acme.clothing.services;
 
-import ar.com.challenge.acme.clothing.entities.Wear;
-import ar.com.challenge.acme.clothing.repository.CatalogueRepository;
-import ar.com.challenge.acme.clothing.reqres.CatalogueRequest;
+import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
+import ar.com.challenge.acme.clothing.reqres.FamilyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@CacheConfig(cacheNames = "product")
+//@CacheConfig(cacheNames = "catalogue")
 @Service
 public class CatalogueService {
 
+
   @Autowired
-  private CatalogueRepository catalogueRepository;
+  private ProductService productService;
 
-  @Caching(evict = {@CacheEvict(value = "getAllCataloguescache", allEntries = true),
-          @CacheEvict(value = "cataloguecache", key = "#catalogueRequest.nombre")
-  })
-  public Long createNewCatalogue(CatalogueRequest catalogueRequest) {
-  /*  Wear wear = new Wear();
-    wear.setNombre(catalogueRequest.getNombre());
-    wear = catalogueRepository.save(wear);
-    return wear.getId();*/
-    return 1l;
+  @Autowired
+  private FamilyService familyService;
+
+ //todos los prod
+  public List<Product> getAllProducts() {
+    return productService.findAll();
   }
 
-  @Cacheable(value = "getAllCataloguescache")
-  public List<Wear> getAllCatalogues() {
-    return catalogueRepository.findAll();
+  //dada familia de un producto
+  public List<Product> findByfamiliaProdutoContainingIgnoreCase(String familiaNombre) {
+    return productService.findByfamiliaProdutoContainingIgnoreCase(familiaNombre);
   }
 
-  public List<Wear> findByNombreContainingIgnoreCase(String nombre) {
-    return catalogueRepository.findByNombreContainingIgnoreCase(nombre);
+  //especifico un id de prod
+  public Product getProdcutById(Long id) {
+    Product requestedProduct = productService.getProductById(id);
+        return requestedProduct;
   }
 
-
-  public Wear getCataloguesById(Long id) {
-    Optional<Wear> requestedCatalogues = catalogueRepository.findById(id);
-
-    if (requestedCatalogues.isEmpty()) {
-      throw new EntityNotFoundException(String.format("Catalogue with id: '%s' not found", id));
+    public List<Product> findByNombreContainingIgnoreCase(String nombre) {
+        return productService.findByNombreContainingIgnoreCase(nombre);
     }
 
-    return requestedCatalogues.get();
-  }
 
-  @Caching(evict = {@CacheEvict(value = "getAllCataloguescache", allEntries = true),
-          @CacheEvict(value = "cataloguecache", key = "#catalogueToUpdateRequest.nombre")
-  })
-  @Transactional
-  public Wear updateCatalogues(Long id, CatalogueRequest catalogueToUpdateRequest) {
 
-    Optional<Wear> catalogueFromDatabase = catalogueRepository.findById(id);
-
-    if (catalogueFromDatabase.isEmpty()) {
-      throw new EntityNotFoundException(String.format("Catalogue with id: '%s' not found", id));
+    public Long createNewFamily(FamilyRequest familyRequest) {
+        return familyService.createNewFamily(familyRequest);
     }
-    Wear catalogueToUpdate = catalogueFromDatabase.get();
-    catalogueToUpdate.setNombre(catalogueToUpdateRequest.getNombre());
-    return catalogueToUpdate;
-  }
 
-  public void deleteCatalogueById(Long id) {
-    catalogueRepository.deleteById(id);
-  }
+    public List<Product> getAllFamilies() {
+        return familyService.getAllFamilies();
+
+    }
+
+
+    public Product getFamilyById(Long id) {
+       return familyService.getFamilyById(id);
+    }
+
+    @Transactional
+    public Product updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
+       return familyService.updateFamily(id,familyToUpdateRequest);
+    }
+
+    public void deleteFamilyById(Long id) {
+      familyService.deleteFamilyById(id);
+    }
+
 }

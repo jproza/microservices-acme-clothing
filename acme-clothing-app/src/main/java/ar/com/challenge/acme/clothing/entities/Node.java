@@ -17,7 +17,7 @@ public class Node {
     private boolean isRoot;
     private boolean isFamily;
     private List<Node> nodes = new ArrayList<>();
-    public Wear data;
+    public Product data;
     public Node parent;
 
 

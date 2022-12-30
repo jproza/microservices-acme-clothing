@@ -1,10 +1,12 @@
 package ar.com.challenge.acme.clothing.controller;
 
-import ar.com.challenge.acme.clothing.entities.Wear;
+import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.logging.LogApp;
 import ar.com.challenge.acme.clothing.reqres.CatalogueRequest;
+import ar.com.challenge.acme.clothing.reqres.FamilyRequest;
 import ar.com.challenge.acme.clothing.services.CatalogueService;
 
+import ar.com.challenge.acme.clothing.services.FamilyService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,41 +27,20 @@ public class CatalogueManagerController {
   @Autowired
   private CatalogueService catalogueService;
 
-  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
-  @PostMapping
-//  @Operation(summary = "Crear un nuevo Catalogo")
-//  @ApiResponses(value = {
-//          @ApiResponse(responseCode = "200", description = "Se creó correctamente el registro del Catalogue",
-//                  content = { @Content(mediaType = "application/json",
-//                          schema = @Schema(implementation = Wear.class)) }),
-//          @ApiResponse(responseCode = "400", description = "Parametros incorrecto",
-//                  content = @Content),
-//          @ApiResponse(responseCode = "404", description = "Errores al crear un Catalogue",
-//                  content = @Content) })
-  public ResponseEntity<Void> createNewCatalogue(@Valid @RequestBody CatalogueRequest catalogueRequest, UriComponentsBuilder uriComponentsBuilder) {
-    Long primaryKey = catalogueService.createNewCatalogue(catalogueRequest);
 
-    UriComponents uriComponents = uriComponentsBuilder.path("/api/catalogue/{id}").buildAndExpand(primaryKey);
-    HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriComponents.toUri());
 
-    return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+  //dada familia de un producto
+  public List<Product> findFamiliaByfamiliaProdutoContainingIgnoreCase(String familiaNombre) {
+    return catalogueService.findByfamiliaProdutoContainingIgnoreCase(familiaNombre);
   }
+
+
+
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @GetMapping
-
-/*  @Operation(summary = "Obtener el total de los  catalogue existentes, puede especificar un filtro por nombre")
-  @ApiResponses(value = {
-          @ApiResponse(responseCode = "200", description = "Se encontraron registros de los Catalogue",
-                  content = { @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = Wear.class)) }),
-          @ApiResponse(responseCode = "400", description = "Parametro incorrecto",
-                  content = @Content),
-          @ApiResponse(responseCode = "404", description = "Catalogue inexistente",
-                  content = @Content) })*/
-  public ResponseEntity<List<Wear>> getAllCatalogues(@RequestParam(required = false) String nombre) {
+  public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) String nombre) {
     if (Strings.isEmpty(nombre)) {
-      return ResponseEntity.ok(catalogueService.getAllCatalogues());
+      return ResponseEntity.ok(catalogueService.getAllProducts());
     } else {
       return ResponseEntity.ok(catalogueService.findByNombreContainingIgnoreCase(nombre));
     }
@@ -67,47 +48,61 @@ public class CatalogueManagerController {
   }
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @GetMapping("/{id}")
-//  @Operation(summary = "Obtener un catalogue por Id")
-//  @ApiResponses(value = {
-//          @ApiResponse(responseCode = "200", description = "Se encontro registro del Catalogue",
-//                  content = { @Content(mediaType = "application/json",
-//                          schema = @Schema(implementation = Wear.class)) }),
-//          @ApiResponse(responseCode = "400", description = "Parametro incorrecto",
-//                  content = @Content),
-//          @ApiResponse(responseCode = "404", description = "catalogue inexistente",
-//                  content = @Content) })
-  public ResponseEntity<Wear> getCatalogueById(@PathVariable("id") Long id) {
-    return ResponseEntity.ok(catalogueService.getCataloguesById(id));
+  public ResponseEntity<Product> getProdcutById(@PathVariable("id") Long id) {
+    return ResponseEntity.ok(catalogueService.getProdcutById(id));
   }
 
-//  @Operation(summary = "Actualiza catalogue de forma total")
-//  @ApiResponses(value = {
-//          @ApiResponse(responseCode = "200", description = "Se actualizó registro del Catalogue",
-//                  content = { @Content(mediaType = "application/json",
-//                          schema = @Schema(implementation = Wear.class)) }),
-//          @ApiResponse(responseCode = "400", description = "Parametro incorrecto",
-//                  content = @Content),
-//          @ApiResponse(responseCode = "404", description = "catalogue inexistente",
-//                  content = @Content) })
+//  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+//  @PutMapping("/{id}")
+//  public ResponseEntity<Product> updateCatalogue(@PathVariable("id") Long id, @Valid @RequestBody CatalogueRequest catalogueRequest) {
+//    return ResponseEntity.ok(catalogueService.updateCatalogues(id, catalogueRequest));
+//  }
+
+//  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+//  @DeleteMapping("/{id}")
+//  public ResponseEntity<Void> deleteCatalogue(@PathVariable("id") Long id) {
+//    catalogueService.deleteCatalogueById(id);
+//    return ResponseEntity.ok().build();
+//  }
+
+
+  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+  @PostMapping
+  public ResponseEntity<Void> createNewFamily(@Valid @RequestBody FamilyRequest familyRequest, UriComponentsBuilder uriComponentsBuilder) {
+    Long primaryKey = catalogueService.createNewFamily(familyRequest);
+
+    UriComponents uriComponents = uriComponentsBuilder.path("/api/family/{id}").buildAndExpand(primaryKey);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setLocation(uriComponents.toUri());
+
+    return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+  }
+  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+  @GetMapping
+  public ResponseEntity<List<Product>> getAllFamilies(@RequestParam(required = false) String nombre) {
+    if (Strings.isEmpty(nombre)) {
+      return ResponseEntity.ok(catalogueService.getAllFamilies());
+    } else {
+      return ResponseEntity.ok(catalogueService.findByNombreContainingIgnoreCase(nombre));
+    }
+
+  }
+  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+  @GetMapping("/{id}")
+  public ResponseEntity<Product> getFamilyById(@PathVariable("id") Long id) {
+    return ResponseEntity.ok(catalogueService.getFamilyById(id));
+  }
+
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @PutMapping("/{id}")
-  public ResponseEntity<Wear> updateCatalogue(@PathVariable("id") Long id, @Valid @RequestBody CatalogueRequest catalogueRequest) {
-    return ResponseEntity.ok(catalogueService.updateCatalogues(id, catalogueRequest));
+  public ResponseEntity<Product> updateCatalogue(@PathVariable("id") Long id, @Valid @RequestBody FamilyRequest familyRequest) {
+    return ResponseEntity.ok(catalogueService.updateFamily(id, familyRequest));
   }
 
-//  @Operation(summary = "Eliminar el catalogo por Id")
-//  @ApiResponses(value = {
-//          @ApiResponse(responseCode = "200", description = "Se eliminó registro del catalogue",
-//                  content = { @Content(mediaType = "application/json",
-//                          schema = @Schema(implementation = Wear.class)) }),
-//          @ApiResponse(responseCode = "400", description = "Parametro incorrecto",
-//                  content = @Content),
-//          @ApiResponse(responseCode = "404", description = "catalogue inexistente",
-//                  content = @Content) })
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteCatalogue(@PathVariable("id") Long id) {
-    catalogueService.deleteCatalogueById(id);
+  public ResponseEntity<Void> deleteFamily(@PathVariable("id") Long id) {
+    catalogueService.deleteFamilyById(id);
     return ResponseEntity.ok().build();
   }
 

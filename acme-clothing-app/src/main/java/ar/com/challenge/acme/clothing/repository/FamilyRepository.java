@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CatalogueRepository extends MongoRepository<Product, Long> {
+public interface FamilyRepository extends MongoRepository<Product, Long> {
 
     List<Product> findByNombreContainingIgnoreCase(String nombre);
 
