@@ -11,5 +11,4 @@ public interface CatalogueRepository extends MongoRepository<Product, Long> {
 
     List<Product> findByNombreContainingIgnoreCase(String nombre);
 
-
 }

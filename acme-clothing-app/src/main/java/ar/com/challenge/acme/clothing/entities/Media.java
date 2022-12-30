@@ -1,7 +1,6 @@
 package ar.com.challenge.acme.clothing.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +11,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Random;
 
 @Document("Medias")
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Media {
 
 

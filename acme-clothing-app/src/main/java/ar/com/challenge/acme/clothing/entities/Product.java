@@ -1,13 +1,12 @@
 package ar.com.challenge.acme.clothing.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,6 +20,7 @@ import java.util.Random;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Product {
 
 
@@ -35,9 +35,11 @@ public class Product {
   @NotBlank
   @NotNull
   private String referencia;
-  @NotBlank
-  @NotNull
+
+
+  @DocumentReference(lazy = true)
   private Family familiaProduto;
+
   @NotBlank
   @NotNull
   private Double precioBase;
@@ -59,10 +61,10 @@ public class Product {
   }
 
   public String getReferencia() {
-    if (referencia == null) {
-      referencia =  "REF-" + fiveDigitGenerator() + "-" + threeDigitGenerator();
+    if (this.referencia == null) {
+      this.referencia =  "REF-" + fiveDigitGenerator() + "-" + threeDigitGenerator();
     }
-    return referencia;
+    return this.referencia;
   }
 
   public int fiveDigitGenerator() {

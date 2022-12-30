@@ -1,16 +1,16 @@
 package ar.com.challenge.acme.clothing.services;
 
+import ar.com.challenge.acme.clothing.entities.Family;
 import ar.com.challenge.acme.clothing.entities.Product;
-import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
 import ar.com.challenge.acme.clothing.reqres.FamilyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 //@CacheConfig(cacheNames = "catalogue")
+//Compositor pattern - Orchestation
 @Service
 public class CatalogueService {
 
@@ -27,9 +27,11 @@ public class CatalogueService {
   }
 
   //dada familia de un producto
-  public List<Product> findByfamiliaProdutoContainingIgnoreCase(String familiaNombre) {
+  public List<Product> findProdcutByFamilyContainingIgnoreCase(String familiaNombre) {
     return productService.findByfamiliaProdutoContainingIgnoreCase(familiaNombre);
   }
+
+
 
   //especifico un id de prod
   public Product getProdcutById(Long id) {
@@ -37,7 +39,7 @@ public class CatalogueService {
         return requestedProduct;
   }
 
-    public List<Product> findByNombreContainingIgnoreCase(String nombre) {
+    public List<Product> findProductByNombreContainingIgnoreCase(String nombre) {
         return productService.findByNombreContainingIgnoreCase(nombre);
     }
 
@@ -47,18 +49,21 @@ public class CatalogueService {
         return familyService.createNewFamily(familyRequest);
     }
 
-    public List<Product> getAllFamilies() {
+    public List<Family> getAllFamilies() {
         return familyService.getAllFamilies();
+    }
 
+    public List<Family> findFamiliesByNombreContainingIgnoreCase(String nombre) {
+        return familyService.findByNombreContainingIgnoreCase(nombre);
     }
 
 
-    public Product getFamilyById(Long id) {
+    public Family getFamilyById(Long id) {
        return familyService.getFamilyById(id);
     }
 
     @Transactional
-    public Product updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
+    public Family updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
        return familyService.updateFamily(id,familyToUpdateRequest);
     }
 

@@ -16,6 +16,7 @@ import java.util.Random;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Customization {
 
   @Id

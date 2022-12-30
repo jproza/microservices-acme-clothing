@@ -1,6 +1,7 @@
 package ar.com.challenge.acme.clothing.services;
 
 
+import ar.com.challenge.acme.clothing.entities.Family;
 import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.repository.FamilyRepository;
 import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
@@ -29,17 +30,17 @@ public class FamilyService {
     }
 //
 //    @Cacheable(value = "getAllCataloguescache")
-    public List<Product> getAllFamilies() {
+    public List<Family> getAllFamilies() {
         return familyRepository.findAll();
     }
 
-    public List<Product> findByNombreContainingIgnoreCase(String nombre) {
-        return familyRepository.findByNombreContainingIgnoreCase(nombre);
+    public List<Family> findByNombreContainingIgnoreCase(String nombre) {
+        return familyRepository.findByNameContainingIgnoreCase(nombre);
     }
 
 
-    public Product getFamilyById(Long id) {
-        Optional<Product> requestedCatalogues = familyRepository.findById(id);
+    public Family getFamilyById(Long id) {
+        Optional<Family> requestedCatalogues = familyRepository.findById(id);
 
         if (requestedCatalogues.isEmpty()) {
             throw new EntityNotFoundException(String.format("Catalogue with id: '%s' not found", id));
@@ -52,15 +53,15 @@ public class FamilyService {
 //            @CacheEvict(value = "cataloguecache", key = "#familyToUpdateRequest.nombre")
 //    })
     @Transactional
-    public Product updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
+    public Family updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
 
-        Optional<Product> catalogueFromDatabase = familyRepository.findById(id);
+        Optional<Family> catalogueFromDatabase = familyRepository.findById(id);
 
         if (catalogueFromDatabase.isEmpty()) {
             throw new EntityNotFoundException(String.format("Catalogue with id: '%s' not found", id));
         }
-        Product catalogueToUpdate = catalogueFromDatabase.get();
-        catalogueToUpdate.setNombre(familyToUpdateRequest.getNombre());
+        Family catalogueToUpdate = catalogueFromDatabase.get();
+        catalogueToUpdate.setName(familyToUpdateRequest.getNombre());
         return catalogueToUpdate;
     }
 
