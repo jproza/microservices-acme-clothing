@@ -6,6 +6,7 @@ import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.repository.FamilyRepository;
 import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
 import ar.com.challenge.acme.clothing.reqres.FamilyRequest;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,9 @@ public class FamilyService {
 //    @Caching(evict = {@CacheEvict(value = "getAllCataloguescache", allEntries = true),
 //            @CacheEvict(value = "cataloguecache", key = "#catalogueRequest.nombre")
 //    })
-    public Long createNewFamily(FamilyRequest catalogueRequest) {
-
-        return 1l;
+    public String createNewFamily(FamilyRequest catalogueRequest) {
+        Family f = Family.builder().name(catalogueRequest.getNombre()).id(new ObjectId()).build();
+        return familyRepository.save(f).getId();
     }
 //
 //    @Cacheable(value = "getAllCataloguescache")
@@ -39,7 +40,7 @@ public class FamilyService {
     }
 
 
-    public Family getFamilyById(Long id) {
+    public Family getFamilyById(String id) {
         Optional<Family> requestedCatalogues = familyRepository.findById(id);
 
         if (requestedCatalogues.isEmpty()) {
@@ -53,19 +54,20 @@ public class FamilyService {
 //            @CacheEvict(value = "cataloguecache", key = "#familyToUpdateRequest.nombre")
 //    })
     @Transactional
-    public Family updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
+    public Family updateFamily(String id, FamilyRequest familyToUpdateRequest) {
 
-        Optional<Family> catalogueFromDatabase = familyRepository.findById(id);
+        Optional<Family> familyFromDatabase = familyRepository.findById(id);
 
-        if (catalogueFromDatabase.isEmpty()) {
+        if (familyFromDatabase.isEmpty()) {
             throw new EntityNotFoundException(String.format("Catalogue with id: '%s' not found", id));
         }
-        Family catalogueToUpdate = catalogueFromDatabase.get();
-        catalogueToUpdate.setName(familyToUpdateRequest.getNombre());
-        return catalogueToUpdate;
+        Family familyToUpdate = familyFromDatabase.get();
+        familyToUpdate.setName(familyToUpdateRequest.getNombre());
+        familyRepository.save(familyToUpdate);
+        return familyToUpdate;
     }
 
-    public void deleteFamilyById(Long id) {
+    public void deleteFamilyById(String id) {
         familyRepository.deleteById(id);
     }
 }

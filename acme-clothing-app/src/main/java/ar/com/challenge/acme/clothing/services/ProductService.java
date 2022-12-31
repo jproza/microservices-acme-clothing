@@ -35,7 +35,8 @@ public class ProductService {
     }
 
 
-    public Product getProductById(Long id) {
+
+    public Product getProductById(String id) {
         Optional<Product> requestedProducts = repository.findById(id);
 
         if (requestedProducts.isEmpty()) {
@@ -49,7 +50,7 @@ public class ProductService {
 //            @CacheEvict(value = "cataloguecache", key = "#catalogueToUpdateRequest.nombre")
 //    })
     @Transactional
-    public Product updateProducts(Long id, Product productToUpdateRequest) {
+    public Product updateProducts(String id, Product productToUpdateRequest) {
 
         Optional<Product> productFromDatabase = repository.findById(id);
 
@@ -61,7 +62,7 @@ public class ProductService {
         return productcatalogueToUpdate;
     }
 
-    public void deleteProductById(Long id) {
+    public void deleteProductById(String id) {
         repository.deleteById(id);
     }
 

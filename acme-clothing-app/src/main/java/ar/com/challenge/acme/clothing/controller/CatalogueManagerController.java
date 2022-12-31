@@ -49,14 +49,14 @@ public class CatalogueManagerController {
   }
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @GetMapping("/product/{id}")
-  public ResponseEntity<Product> getProdcutById(@PathVariable("id") Long id) {
+  public ResponseEntity<Product> getProdcutById(@PathVariable("id") String id) {
     return ResponseEntity.ok(catalogueService.getProdcutById(id));
   }
 
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @PostMapping(value="/family")
   public ResponseEntity<Void> createNewFamily(@Valid @RequestBody FamilyRequest familyRequest, UriComponentsBuilder uriComponentsBuilder) {
-    Long primaryKey = catalogueService.createNewFamily(familyRequest);
+    String primaryKey = catalogueService.createNewFamily(familyRequest);
 
     UriComponents uriComponents = uriComponentsBuilder.path("/api/family/{id}").buildAndExpand(primaryKey);
     HttpHeaders headers = new HttpHeaders();
@@ -77,19 +77,19 @@ public class CatalogueManagerController {
   }
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @GetMapping("/family/{id}")
-  public ResponseEntity<Family> getFamilyById(@PathVariable("id") Long id) {
+  public ResponseEntity<Family> getFamilyById(@PathVariable("id") String id) {
     return ResponseEntity.ok(catalogueService.getFamilyById(id));
   }
 
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @PutMapping("/family/{id}")
-  public ResponseEntity<Family> updateFamily(@PathVariable("id") Long id, @Valid @RequestBody FamilyRequest familyRequest) {
+  public ResponseEntity<Family> updateFamily(@PathVariable("id") String id, @Valid @RequestBody FamilyRequest familyRequest) {
     return ResponseEntity.ok(catalogueService.updateFamily(id, familyRequest));
   }
 
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @DeleteMapping("/family/{id}")
-  public ResponseEntity<Void> deleteFamily(@PathVariable("id") Long id) {
+  public ResponseEntity<Void> deleteFamily(@PathVariable("id") String id) {
     catalogueService.deleteFamilyById(id);
     return ResponseEntity.ok().build();
   }

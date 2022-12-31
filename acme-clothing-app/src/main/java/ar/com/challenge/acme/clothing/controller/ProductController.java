@@ -52,13 +52,13 @@ public class ProductController {
     }
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") String id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @Valid @RequestBody ProductRequest productRequest) {
         Product p = new Product();
         p.setId(productRequest.getId());
         p.setNombre(productRequest.getNombre());
@@ -67,7 +67,7 @@ public class ProductController {
 
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") String id) {
         productService.deleteProductById(id);
         return ResponseEntity.ok().build();
     }

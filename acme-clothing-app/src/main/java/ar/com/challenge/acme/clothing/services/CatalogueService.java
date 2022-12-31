@@ -34,7 +34,7 @@ public class CatalogueService {
 
 
   //especifico un id de prod
-  public Product getProdcutById(Long id) {
+  public Product getProdcutById(String id) {
     Product requestedProduct = productService.getProductById(id);
         return requestedProduct;
   }
@@ -45,7 +45,7 @@ public class CatalogueService {
 
 
 
-    public Long createNewFamily(FamilyRequest familyRequest) {
+    public String createNewFamily(FamilyRequest familyRequest) {
         return familyService.createNewFamily(familyRequest);
     }
 
@@ -58,16 +58,16 @@ public class CatalogueService {
     }
 
 
-    public Family getFamilyById(Long id) {
+    public Family getFamilyById(String id) {
        return familyService.getFamilyById(id);
     }
 
     @Transactional
-    public Family updateFamily(Long id, FamilyRequest familyToUpdateRequest) {
+    public Family updateFamily(String id, FamilyRequest familyToUpdateRequest) {
        return familyService.updateFamily(id,familyToUpdateRequest);
     }
 
-    public void deleteFamilyById(Long id) {
+    public void deleteFamilyById(String id) {
       familyService.deleteFamilyById(id);
     }
 
