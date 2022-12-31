@@ -1,8 +1,10 @@
 package ar.com.challenge.acme.clothing.services;
 
+import ar.com.challenge.acme.clothing.entities.Family;
 import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
 import ar.com.challenge.acme.clothing.repository.ProductRepository;
+import ar.com.challenge.acme.clothing.reqres.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
@@ -50,7 +52,7 @@ public class ProductService {
 //            @CacheEvict(value = "cataloguecache", key = "#catalogueToUpdateRequest.nombre")
 //    })
     @Transactional
-    public Product updateProducts(String id, Product productToUpdateRequest) {
+    public Product updateProduct(String id, ProductRequest productToUpdateRequest) {
 
         Optional<Product> productFromDatabase = repository.findById(id);
 
@@ -59,6 +61,13 @@ public class ProductService {
         }
         Product productcatalogueToUpdate = productFromDatabase.get();
         productcatalogueToUpdate.setNombre(productToUpdateRequest.getNombre());
+        productcatalogueToUpdate.setFamiliaProduto(productToUpdateRequest.getFamiliaProduto());
+        productcatalogueToUpdate.setPrecioBase(productToUpdateRequest.getPrecioBase());
+
+
+        repository.save(productcatalogueToUpdate);
+
+
         return productcatalogueToUpdate;
     }
 
@@ -68,7 +77,7 @@ public class ProductService {
 
 
     public List<Product> findByfamiliaProdutoContainingIgnoreCase(String nombreFamilia) {
-       return repository.findByFamiliaProduto_Name(nombreFamilia);
+       return repository.findByFamiliaProduto_NameContains(nombreFamilia);
     }
 
 }

@@ -94,7 +94,7 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 //        "            as: \"Families\"\n" +
 //        "        }\n" +
 //        "    }"})
-List<Product> findByFamiliaProduto_Name(String name) ;
+List<Product> findByFamiliaProduto_NameContains(String name) ;
 //@Aggregation(pipeline = {"{ $lookup: { from: 'Families', let: { name: '$names' }, pipeline: [{ $match: { $expr: { $and: [ { $eq: ['$names', '$$name']}]}, as: 'deliveryZipCodeTimings' } }"})
 
 //    {

@@ -4,6 +4,7 @@ import ar.com.challenge.acme.clothing.entities.Family;
 import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.logging.LogApp;
 import ar.com.challenge.acme.clothing.reqres.FamilyRequest;
+import ar.com.challenge.acme.clothing.reqres.ProductRequest;
 import ar.com.challenge.acme.clothing.services.CatalogueService;
 
 import org.apache.logging.log4j.util.Strings;
@@ -52,6 +53,14 @@ public class CatalogueManagerController {
   public ResponseEntity<Product> getProdcutById(@PathVariable("id") String id) {
     return ResponseEntity.ok(catalogueService.getProdcutById(id));
   }
+
+
+  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+  @PutMapping("/product/{id}")
+  public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @Valid @RequestBody ProductRequest productRequest) {
+    return ResponseEntity.ok(catalogueService.updateProduct(id, productRequest));
+  }
+
 
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @PostMapping(value="/family")

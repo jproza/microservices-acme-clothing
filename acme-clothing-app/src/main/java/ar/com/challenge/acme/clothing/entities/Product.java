@@ -40,20 +40,19 @@ public class Product {
   //@DocumentReference(lazy = true)
   private Family familiaProduto;
 
-  @NotBlank
   @NotNull
   private Double precioBase;
-  @NotBlank
-  @NotNull
+//  @NotBlank
+//  @NotNull
   private Customization customization;
-  @NotBlank
-  @NotNull
+//  @NotBlank
+//  @NotNull
   private List<Slogan> lstSlogan;
-  @NotBlank
-  @NotNull
+//  @NotBlank
+//  @NotNull
   private List<Media> listMedia;
-  @NotBlank
-  @NotNull
+//  @NotBlank
+//  @NotNull
   private Stock stock;
 
   public String getId(){

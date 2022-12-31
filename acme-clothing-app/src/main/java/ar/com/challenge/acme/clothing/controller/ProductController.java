@@ -59,10 +59,7 @@ public class ProductController {
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @Valid @RequestBody ProductRequest productRequest) {
-        Product p = new Product();
-        p.setId(productRequest.getId());
-        p.setNombre(productRequest.getNombre());
-        return ResponseEntity.ok(productService.updateProducts(id, p));
+        return ResponseEntity.ok(productService.updateProduct(id, productRequest));
     }
 
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)

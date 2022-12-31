@@ -3,6 +3,7 @@ package ar.com.challenge.acme.clothing.services;
 import ar.com.challenge.acme.clothing.entities.Family;
 import ar.com.challenge.acme.clothing.entities.Product;
 import ar.com.challenge.acme.clothing.reqres.FamilyRequest;
+import ar.com.challenge.acme.clothing.reqres.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +66,11 @@ public class CatalogueService {
     @Transactional
     public Family updateFamily(String id, FamilyRequest familyToUpdateRequest) {
        return familyService.updateFamily(id,familyToUpdateRequest);
+    }
+
+    @Transactional
+    public Product updateProduct(String id, ProductRequest productToUpdateRequest) {
+        return productService.updateProduct(id,productToUpdateRequest);
     }
 
     public void deleteFamilyById(String id) {
