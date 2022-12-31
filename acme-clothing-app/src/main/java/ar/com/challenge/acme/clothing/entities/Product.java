@@ -1,6 +1,7 @@
 package ar.com.challenge.acme.clothing.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -23,20 +24,16 @@ import java.util.Random;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product {
+public class Product  extends Customization {
 
 
-  @Id
-  private ObjectId id;
   @NotBlank
   @NotNull
   private String nombre;
   @NotBlank
   @NotNull
   private String descripcion;
-  @NotBlank
-  @NotNull
-  private String referencia;
+
 
 
   //@DocumentReference(lazy = true)
@@ -44,9 +41,7 @@ public class Product {
 
   @NotNull
   private Double precioBase;
-//  @NotBlank
-//  @NotNull
-  private Customization customization;
+
 //  @NotBlank
 //  @NotNull
   private List<Slogan> lstSlogan;
@@ -57,15 +52,28 @@ public class Product {
 //  @NotNull
   private Stock stock;
 
-  public String getId(){
-    return id.toHexString();
-  }
 
-  public String getReferencia() {
+
+ @JsonIgnore
+  public String getReferenciaCustom() {
     if (StringUtils.isEmpty(this.referencia)) {
-      this.setReferencia("REF-" + fiveDigitGenerator() + "-" + threeDigitGenerator());
+      this.setReferencia("CUS-" + "REF-" +  fourDigitGenerator());
     }
     return this.referencia;
+  }
+
+
+  public String getReferencia() {
+    if (StringUtils.isEmpty(getNombrePersonalizacion())) {
+
+      if (StringUtils.isEmpty(this.referencia)) {
+        this.setReferencia("REF-" + fiveDigitGenerator() + "-" + threeDigitGenerator());
+      }
+      return this.referencia;
+
+    }
+    return getReferenciaCustom();
+
   }
 
 

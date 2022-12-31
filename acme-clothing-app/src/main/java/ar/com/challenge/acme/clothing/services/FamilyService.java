@@ -26,7 +26,9 @@ public class FamilyService {
 //            @CacheEvict(value = "cataloguecache", key = "#catalogueRequest.nombre")
 //    })
     public String createNewFamily(FamilyRequest catalogueRequest) {
-        Family f = Family.builder().name(catalogueRequest.getNombre()).id(new ObjectId()).build();
+        Family f = new Family();
+        f.setName(catalogueRequest.getNombre());
+        f.setId(new ObjectId());
         return familyRepository.save(f).getId();
     }
 //

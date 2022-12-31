@@ -157,6 +157,74 @@ public class DefaultInitializer implements CommandLineRunner {
 
 
 
+
+
+    product = new Product();
+    product.setPrecioPersonalizacion(22.8);
+    product.setDetallePersonalizacion("La fragancia Cloud de Ariana Grande es la nueva fragancia personalizada");
+    product.setNombrePersonalizacion("Perfume Ariana grande personalizado");
+
+    product.setId(new ObjectId());
+    product.setNombre("Perfume");
+    product.setDescripcion("La fragancia Cloud de Ariana Grande es la nueva fragancia inspiradora que imbuye una expresión artística y reflexiva de positividad y felicidad de Ariana a sus fanáticos.");
+    product.setPrecioBase(18.7);
+    f = new Family();
+    f.setId(new ObjectId());
+    f.setName("Perfumes");
+    product.setReferencia(product.getReferencia());
+    fsaved = familyRepository.save(f);
+    product.setFamiliaProduto(fsaved);
+
+
+    lstStorage = new ArrayList<>();
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito55").quantity(1).build();
+    lstStorage.add(storage);
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito1").quantity(0).build();
+    lstStorage.add(storage);
+    stk = Stock.builder().id(new ObjectId()).lstStorage(lstStorage).build();
+
+    stkSaved = stockRepository.save(stk);
+
+    product.setStock(stkSaved);
+
+
+    productRepository.save(product);
+
+
+    product = new Product();
+
+
+    product.setId(new ObjectId());
+    product.setNombre("Zueco Clasico");
+    product.setDescripcion("Suela de acetato de vinilo etileno importado 100% sintético.");
+    product.setPrecioBase(18.7);
+    f = new Family();
+    f.setId(new ObjectId());
+    f.setName("Calzado");
+    f.setPrecioPersonalizacion(32.0);
+    f.setDetallePersonalizacion("Suela de acetato Personalizado. ");
+    f.setNombrePersonalizacion("Zueco Clasico personalizado");
+    product.setReferencia(product.getReferencia());
+    fsaved = familyRepository.save(f);
+    product.setFamiliaProduto(fsaved);
+
+
+    lstStorage = new ArrayList<>();
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito55").quantity(1).build();
+    lstStorage.add(storage);
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito1").quantity(0).build();
+    lstStorage.add(storage);
+    stk = Stock.builder().id(new ObjectId()).lstStorage(lstStorage).build();
+
+    stkSaved = stockRepository.save(stk);
+
+    product.setStock(stkSaved);
+
+
+    productRepository.save(product);
+
+
+
     log.info("... finished app initialization");
 
   }
