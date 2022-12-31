@@ -42,6 +42,13 @@ public class DefaultInitializer implements CommandLineRunner {
 
     product = new Product();
     product.setId(new ObjectId());
+    product.setNombre("Product11");
+    product.setReferencia(product.getReferencia());
+    product.setFamiliaProduto(fsaved);
+    productRepository.save(product);
+
+    product = new Product();
+    product.setId(new ObjectId());
     product.setNombre("Product2");
     f = new Family();
     f.setId(new ObjectId());
@@ -50,6 +57,7 @@ public class DefaultInitializer implements CommandLineRunner {
     fsaved = familyRepository.save(f);
     product.setFamiliaProduto(fsaved);
     productRepository.save(product);
+
 
 
     log.info("... finished app initialization");
