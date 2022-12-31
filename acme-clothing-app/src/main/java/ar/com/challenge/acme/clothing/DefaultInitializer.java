@@ -3,6 +3,7 @@ package ar.com.challenge.acme.clothing;
 import ar.com.challenge.acme.clothing.entities.*;
 import ar.com.challenge.acme.clothing.repository.FamilyRepository;
 import ar.com.challenge.acme.clothing.repository.ProductRepository;
+import ar.com.challenge.acme.clothing.repository.StockRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class DefaultInitializer implements CommandLineRunner {
   @Autowired
   private FamilyRepository familyRepository;
 
+  @Autowired
+  private StockRepository stockRepository;
+
+
   @Override
   public void run(String... args) throws Exception {
 
@@ -30,6 +35,8 @@ public class DefaultInitializer implements CommandLineRunner {
 
     familyRepository.deleteAll();
     productRepository.deleteAll();
+    stockRepository.deleteAll();
+
 
 
     Product product = new Product();
@@ -46,7 +53,10 @@ public class DefaultInitializer implements CommandLineRunner {
     storage = Storage.builder().id(new ObjectId()).nombre("Deposito3").quantity(50).build();
     lstStorage.add(storage);
     Stock stk = Stock.builder().id(new ObjectId()).lstStorage(lstStorage).build();
-    product.setStock(stk);
+
+    Stock stkSaved = stockRepository.save(stk);
+
+    product.setStock(stkSaved);
 
     Family f = new Family();
     f.setName("Mas Vendidos");
@@ -137,7 +147,10 @@ public class DefaultInitializer implements CommandLineRunner {
     storage = Storage.builder().id(new ObjectId()).nombre("Deposito3").quantity(0).build();
     lstStorage.add(storage);
     stk = Stock.builder().id(new ObjectId()).lstStorage(lstStorage).build();
-    product.setStock(stk);
+
+    stkSaved = stockRepository.save(stk);
+
+    product.setStock(stkSaved);
 
 
     productRepository.save(product);
