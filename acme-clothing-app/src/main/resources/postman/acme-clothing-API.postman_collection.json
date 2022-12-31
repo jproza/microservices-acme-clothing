@@ -7,127 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "1.Login - Form",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"username\": \"jproza\",\n  \"password\": \"jproza\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/auth/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "3.Logout",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
-					},
-					{
-						"key": "Accept-Language",
-						"value": "en-US,en;q=0.9"
-					},
-					{
-						"key": "Cache-Control",
-						"value": "max-age=0"
-					},
-					{
-						"key": "Connection",
-						"value": "keep-alive"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					},
-					{
-						"key": "Cookie",
-						"value": "bezkoder=; jwt1CookieName=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqcHJvemEiLCJpYXQiOjE2NjQ4MDQ1MjgsImV4cCI6MTY2NDg5MDkyOH0.R7WswRFoHvYEmyqYL0ZSZo7JvIsC7fKayiAwHvngJW0ZMrLvtjz2x1vA09z6LiUCp6fZ7Olkz4gFR_mGqNdkzg; JSESSIONID=0C205AF00B03D229E6F4F61A7C811D7E; Idea-57c8167d=d00a74af-f943-43ec-b253-14a149a58410"
-					},
-					{
-						"key": "Origin",
-						"value": "http://localhost:8080"
-					},
-					{
-						"key": "Referer",
-						"value": "http://localhost:8080/signin"
-					},
-					{
-						"key": "Sec-Fetch-Dest",
-						"value": "document"
-					},
-					{
-						"key": "Sec-Fetch-Mode",
-						"value": "navigate"
-					},
-					{
-						"key": "Sec-Fetch-Site",
-						"value": "same-origin"
-					},
-					{
-						"key": "Sec-Fetch-User",
-						"value": "?1"
-					},
-					{
-						"key": "Upgrade-Insecure-Requests",
-						"value": "1"
-					},
-					{
-						"key": "User-Agent",
-						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
-					},
-					{
-						"key": "sec-ch-ua",
-						"value": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\""
-					},
-					{
-						"key": "sec-ch-ua-mobile",
-						"value": "?0"
-					},
-					{
-						"key": "sec-ch-ua-platform",
-						"value": "\"macOS\""
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/auth/logout",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "2. get all Catalogues (protegido)",
+			"name": "1. Get all Products of Catalogue",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -138,65 +18,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"catalogue"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "7. get all Catalogues  Contains (protegido)",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "JSESSIONID",
-						"value": "B50947D3D8C4072983A6270B08A15CD9",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/catalogue?nombre=Catalogue3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"catalogue"
-					],
-					"query": [
-						{
-							"key": "nombre",
-							"value": "Catalogue3"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "5. get Catalogue por ID (protegido)",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "JSESSIONID",
-						"value": "B50947D3D8C4072983A6270B08A15CD9",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/catalogue/2",
+					"raw": "http://localhost:8080/api/catalogue/product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -205,14 +27,137 @@
 					"path": [
 						"api",
 						"catalogue",
-						"2"
+						"product"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "4. Crear Catalogue (protegido)",
+			"name": "2. Get all Products  Contains a name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/catalogue/product?nombre=Iphone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"catalogue",
+						"product"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "Iphone"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get All Products by Family name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/catalogue/family/product?familiaNombre=Ofer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"catalogue",
+						"family",
+						"product"
+					],
+					"query": [
+						{
+							"key": "familiaNombre",
+							"value": "Ofer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Get All Families",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/catalogue/family/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"catalogue",
+						"family",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. Get All Families ById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/catalogue/family/63b028e6cdaec17586635a9f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"catalogue",
+						"family",
+						"63b028e6cdaec17586635a9f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Create a new Family",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -224,7 +169,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\":\"Catalogue-ultimo\"\n}",
+					"raw": "{\n    \"nombre\": \"Calzado\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -232,7 +177,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue",
+					"raw": "http://localhost:8080/api/catalogue/family",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -240,14 +185,15 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"catalogue"
+						"catalogue",
+						"family"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "5. Actualizar Catalogue (protegido)",
+			"name": "5. Update a Family",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -259,7 +205,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\":\"Catalogue1\"\n}",
+					"raw": "{\n    \"nombre\":\"Familia24\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -267,7 +213,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue/1",
+					"raw": "http://localhost:8080/api/catalogue/family/63b02947cdaec17586635aa0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -276,14 +222,52 @@
 					"path": [
 						"api",
 						"catalogue",
-						"1"
+						"family",
+						"63b02947cdaec17586635aa0"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "6. Delete Catalogue por ID (protegido)",
+			"name": "6. Update Product set new Family",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"63b078fd5c5ec943a56bbe70\",\n    \"nombre\": \"Stanley Classic\",\n    \"descripcion\": \"Our Stanley Classic Vacuum Bottle is made with superior insulation that keeps liquids (soup, coffee, tea) hot or cold drinks cool for up to 24 hours. It’s also made with BPA-free materials, keeping its contents safe to consume\",\n    \"referencia\": \"REF-10420-120\",\n   \"familiaProduto\": {\n            \"id\": \"63b078fd5c5ec943a56bbe79\",\n            \"nombrePersonalizacion\": null,\n            \"referencia\": null,\n            \"precioPersonalizacion\": null,\n            \"detallePersonalizacion\": null,\n            \"name\": \"Oferta de la Semana\"\n        },\n    \"precioBase\": \"11.0\",\n    \"customization\": null,\n    \"lstSlogan\": null,\n    \"listMedia\": null,\n    \"stock\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/catalogue/product/63b078fd5c5ec943a56bbe70",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"catalogue",
+						"product",
+						"63b078fd5c5ec943a56bbe70"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Delete Family ById",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -294,7 +278,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue/1",
+					"raw": "http://localhost:8080/api/catalogue/family/63b029a8cdaec17586635aa1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -303,7 +287,110 @@
 					"path": [
 						"api",
 						"catalogue",
-						"1"
+						"family",
+						"63b029a8cdaec17586635aa1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Get all Stock  By Storage Contains a name Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/stock?storageName=Dep",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stock"
+					],
+					"query": [
+						{
+							"key": "storageName",
+							"value": "Dep"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Get all Stock  By Product name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/stock/product?nombre=Stanley",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stock",
+						"product"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "Stanley"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Update a Product Stock",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"stock\": {\n            \"id\": \"63b078fd5c5ec943a56bbe73\",\n            \"lstStorage\": [\n                {\n                    \"id\": \"63b06817ddc0b402332f51a1\",\n                    \"nombre\": \"Deposito1\",\n                    \"quantity\": 0\n                },\n                {\n                    \"id\": \"63b06817ddc0b402332f51a2\",\n                    \"nombre\": \"Deposito3\",\n                    \"quantity\": 0\n                }\n            ]\n        }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stock/product/63b078fd5c5ec943a56bbe70",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stock",
+						"product",
+						"63b078fd5c5ec943a56bbe70"
 					]
 				}
 			},
