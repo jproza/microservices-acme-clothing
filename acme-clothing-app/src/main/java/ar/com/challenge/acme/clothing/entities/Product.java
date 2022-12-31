@@ -37,7 +37,7 @@ public class Product {
   private String referencia;
 
 
-  @DocumentReference(lazy = true)
+  //@DocumentReference(lazy = true)
   private Family familiaProduto;
 
   @NotBlank

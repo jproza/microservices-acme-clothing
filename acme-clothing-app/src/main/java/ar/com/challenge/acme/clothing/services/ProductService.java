@@ -67,7 +67,7 @@ public class ProductService {
 
 
     public List<Product> findByfamiliaProdutoContainingIgnoreCase(String nombreFamilia) {
-       return repository.findByfamiliaProdutoContainingIgnoreCase(nombreFamilia);
+       return repository.findByFamiliaProduto_Name(nombreFamilia);
     }
 
 }

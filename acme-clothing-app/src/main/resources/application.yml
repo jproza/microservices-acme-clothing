@@ -5,16 +5,24 @@ eureka:
     instance:
         hostname: localhost
 logging:
-    file:
-        name: clothing.log
-        path: .
     level:
         ar:
             com:
                 challenge:
                     acme:
                         clothing: INFO
+        org:
+            springframework:
+                data:
+                    mongodb:
+                        repository:
+                            Query: TRACE
+                            Aggregation: TRACE
+                        core:
+                            MongoTemplate: TRACE
         root: WARN
+
+
 management:
     endpoint:
         health:
