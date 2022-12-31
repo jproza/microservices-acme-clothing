@@ -24,6 +24,8 @@ public class Storage {
         @NotNull
         private String nombre;
 
+        private int quantity;
+
 
         public String getId(){
                 return id.toHexString();

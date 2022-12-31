@@ -1,9 +1,6 @@
 package ar.com.challenge.acme.clothing;
 
-import ar.com.challenge.acme.clothing.entities.Family;
-import ar.com.challenge.acme.clothing.entities.Media;
-import ar.com.challenge.acme.clothing.entities.Product;
-import ar.com.challenge.acme.clothing.entities.Slogan;
+import ar.com.challenge.acme.clothing.entities.*;
 import ar.com.challenge.acme.clothing.repository.FamilyRepository;
 import ar.com.challenge.acme.clothing.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +40,13 @@ public class DefaultInitializer implements CommandLineRunner {
             "(soup, coffee, tea) hot or cold drinks cool for up to 24 hours. It’s also made with BPA-free materials, keeping its contents safe to consume");
     product.setPrecioBase(11.110);
 
+    List<Storage> lstStorage = new ArrayList<>();
+    Storage storage = Storage.builder().id(new ObjectId()).nombre("Deposito1").quantity(20).build();
+    lstStorage.add(storage);
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito3").quantity(50).build();
+    lstStorage.add(storage);
+    Stock stk = Stock.builder().id(new ObjectId()).lstStorage(lstStorage).build();
+    product.setStock(stk);
 
     Family f = new Family();
     f.setName("Mas Vendidos");
@@ -125,6 +129,17 @@ public class DefaultInitializer implements CommandLineRunner {
     product.setReferencia(product.getReferencia());
     fsaved = familyRepository.save(f);
     product.setFamiliaProduto(fsaved);
+
+
+    lstStorage = new ArrayList<>();
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito1").quantity(0).build();
+    lstStorage.add(storage);
+    storage = Storage.builder().id(new ObjectId()).nombre("Deposito3").quantity(0).build();
+    lstStorage.add(storage);
+    stk = Stock.builder().id(new ObjectId()).lstStorage(lstStorage).build();
+    product.setStock(stk);
+
+
     productRepository.save(product);
 
 
