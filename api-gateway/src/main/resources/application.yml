@@ -30,9 +30,9 @@ spring:
           predicates:
             - Path=/api/catalogue/**
         - id: CATALOGUE-SERVICE-REPLICA
-          uri: http://acme-clothing:7070/
+          uri: http://acme-clothing:8000/
           predicates:
-            - Path=/api/catalogue-replica/**
+            - Path=/api/catalogue/replica/**
         - id: PRODUCT-SERVICE
           uri: lb://PRODUCT-SERVICE
           predicates:
