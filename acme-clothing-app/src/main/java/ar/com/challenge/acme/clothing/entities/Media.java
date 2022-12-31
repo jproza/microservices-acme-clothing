@@ -1,6 +1,7 @@
 package ar.com.challenge.acme.clothing.entities;
 
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.security.SecureRandom;
 import java.util.Random;
 
 @Document("Medias")
@@ -27,9 +29,9 @@ public class Media {
     @NotBlank
     @NotNull
     private String identificador;
-    @NotBlank
-    @NotNull
+
     private int priorite;
+    private int size;
 
 
 
@@ -38,16 +40,17 @@ public class Media {
     }
 
 
-    public String getReferencia() {
-        if (identificador == null) {
-            identificador =  "MED-"  + sixDigitGenerator();
+    public String getIdentificador() {
+        if (StringUtils.isEmpty(this.identificador)) {
+            this.setIdentificador("MED-"  + sixDigitGenerator());
         }
-        return identificador;
+        return this.identificador;
     }
 
     public int sixDigitGenerator() {
-        Random r = new Random( System.currentTimeMillis() );
-        return ((1 + r.nextInt(2)) * 100000 + r.nextInt(100000));
+        SecureRandom secureRandom = new SecureRandom();
+        int randomWithSecureRandomWithinARange = secureRandom.nextInt(100000 - 1) + 1 * 100000;
+        return randomWithSecureRandomWithinARange;
     }
 
 }

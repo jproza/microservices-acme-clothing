@@ -23,13 +23,16 @@ public class Customization {
   private ObjectId id;
   @NotBlank
   @NotNull
-  private String nombre_personalización;
+  private String nombrePersonalización;
   @NotBlank
   @NotNull
   private String referencia;
+  @NotNull
+  private Double precioBase;
   @NotBlank
   @NotNull
-  private Family familia;
+  private String detallePersonalizacion;
+
 
 
   public String getId(){

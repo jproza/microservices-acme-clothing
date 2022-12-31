@@ -1,6 +1,7 @@
 package ar.com.challenge.acme.clothing.entities;
 
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.security.SecureRandom;
 import java.util.Random;
 
 
@@ -30,9 +32,9 @@ public class Slogan {
     @NotBlank
     @NotNull
     private String alternateText;
-    @NotBlank
+
     @NotNull
-    private Node familia;
+    private Family familia;
 
 
 
@@ -41,16 +43,26 @@ public class Slogan {
     }
 
 
-    public String getReferencia() {
-        if (identificador == null) {
-            identificador =  "SLO-" + "-" + fourDigitGenerator();
+    public String getIdentificador() {
+        if (StringUtils.isEmpty(this.identificador)) {
+            setIdentificador("SLO-" + fourDigitGenerator());
         }
-        return identificador;
+        return this.identificador;
     }
 
     public int fourDigitGenerator() {
-        Random r = new Random( System.currentTimeMillis() );
-        return ((1 + r.nextInt(2)) * 1000 + r.nextInt(1000));
+        SecureRandom secureRandom = new SecureRandom();
+        int randomWithSecureRandomWithinARange = secureRandom.nextInt(1000 - 1) + 1 * 1000;
+        return randomWithSecureRandomWithinARange;
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(new Slogan().getIdentificador());
+        System.out.println(new Slogan().getIdentificador());
+        System.out.println(new Slogan().getIdentificador());
+        System.out.println(new Slogan().getIdentificador());
+
     }
 
 }

@@ -2,6 +2,7 @@ package ar.com.challenge.acme.clothing.entities;
 
 
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -60,20 +62,23 @@ public class Product {
   }
 
   public String getReferencia() {
-    if (this.referencia == null) {
-      this.referencia =  "REF-" + fiveDigitGenerator() + "-" + threeDigitGenerator();
+    if (StringUtils.isEmpty(this.referencia)) {
+      this.setReferencia("REF-" + fiveDigitGenerator() + "-" + threeDigitGenerator());
     }
     return this.referencia;
   }
 
+
   public int fiveDigitGenerator() {
-    Random r = new Random( System.currentTimeMillis() );
-    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+    SecureRandom secureRandom = new SecureRandom();
+    int randomWithSecureRandomWithinARange = secureRandom.nextInt(10000 - 1) + 1 * 10000;
+    return randomWithSecureRandomWithinARange;
   }
 
   public int threeDigitGenerator() {
-    Random r = new Random( System.currentTimeMillis() );
-    return ((1 + r.nextInt(2)) * 100 + r.nextInt(100));
+    SecureRandom secureRandom = new SecureRandom();
+    int randomWithSecureRandomWithinARange = secureRandom.nextInt(100 - 1) + 1 * 100;
+    return randomWithSecureRandomWithinARange;
   }
 
 }

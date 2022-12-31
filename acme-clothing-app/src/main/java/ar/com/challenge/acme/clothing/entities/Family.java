@@ -25,6 +25,8 @@ public class Family {
     @NotBlank
     @NotNull
     private String name;
+
+    private Customization customization;
 //    @NotBlank
 //    @NotNull
 //    private List<Product> nodes = new ArrayList<>();
