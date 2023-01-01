@@ -14,6 +14,7 @@
 - **RabbitMQ**
 - **Sleuth/Zipkin**
 - **Lombok**
+- **Custom Annotation metric -  @LogApp()**
 - **Postman Collections**
 
 ###Pre requirements
@@ -44,12 +45,12 @@
     cd discovery-server (folder)
     run: docker build -t jproza/discovery-server .
     cd acme-clothing-app (folder)
-    run: docker build -t jproza/acme-clothing-app .
+    run: docker build -t jproza/acme-clothing .
 
 ####How to push image into docker per module:
 
     use and run:
-    docker push jproza/acme-clothing-app
+    docker push jproza/acme-clothing
     docker push jproza/api-gateway
     docker push jproza/discovery-server
 
@@ -63,7 +64,7 @@
 
 ![img.png](img.png)
 
-###How to make a valid Requests to MicroServices
+###How to make a valid Requests to MicroServices (main and replications)
 > Port: 9191 -> port of api-gateway
 > Port: 8080 -> port of microservices  - behind api-gateway
 > 
@@ -71,6 +72,10 @@
         http://localhost:9191/api/catalogue/product
     result:
         retrieve All products from the catalogue.
+    
+    Replication all endpoints over:
+        http://localhost:9191/api/catalogue/replica/product
+        ....
         
 
 

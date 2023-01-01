@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "1. Get all Products of Catalogue",
+			"name": "1. Get all Products from Catalogue",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -18,7 +18,34 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:9191/api/catalogue/product",
+					"raw": "http://localhost:8080/api/catalogue/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"catalogue",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.1 Get all Products from Replicate Catalogue",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "JSESSIONID",
+						"value": "B50947D3D8C4072983A6270B08A15CD9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9191/api/catalogue/replica/product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -27,6 +54,7 @@
 					"path": [
 						"api",
 						"catalogue",
+						"replica",
 						"product"
 					]
 				}
