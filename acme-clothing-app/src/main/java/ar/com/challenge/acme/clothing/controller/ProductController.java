@@ -29,16 +29,8 @@ public class ProductController {
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @PostMapping
     public ResponseEntity<Void> createNewProduct(@Valid @RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
-
-        Stream.Builder<Product> builder = Stream.builder();
-        Stream<Product> p = builder.add(new Product()).build();
-        Long primaryKey = productService.createNewProduct(p.findFirst().get());
-
-        UriComponents uriComponents = uriComponentsBuilder.path("/api/product/{id}").buildAndExpand(primaryKey);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(uriComponents.toUri());
-
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        productService.createNewProduct(productRequest);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
     @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @GetMapping

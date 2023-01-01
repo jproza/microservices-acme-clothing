@@ -20,8 +20,7 @@ public class ProductRequest {
     @NotBlank
     @NotNull
     private String descripcion;
-    @NotBlank
-    @NotNull
+
     private String referencia;
 
     private Family familiaProduto;
@@ -39,5 +38,7 @@ public class ProductRequest {
    // @NotBlank
    // @NotNull
     private Stock stock;
+
+
 
 }

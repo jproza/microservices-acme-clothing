@@ -54,6 +54,13 @@ public class CatalogueManagerController {
     return ResponseEntity.ok(catalogueService.getProdcutById(id));
   }
 
+  @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+  @PostMapping(value="/product")
+  public ResponseEntity<Void> createNewProduct(@Valid @RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
+    catalogueService.createProduct(productRequest);
+    return new ResponseEntity<Void>(HttpStatus.CREATED);
+  }
+
 
   @LogApp(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
   @PutMapping("/product/{id}")

@@ -1,9 +1,10 @@
 package ar.com.challenge.acme.clothing.services;
 
-import ar.com.challenge.acme.clothing.entities.Product;
+import ar.com.challenge.acme.clothing.entities.*;
 import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
 import ar.com.challenge.acme.clothing.repository.ProductRepository;
 import ar.com.challenge.acme.clothing.reqres.ProductRequest;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +27,71 @@ public class ProductService {
         return repository.findAll();
     };
 
-    public Long createNewProduct(Product product) {
-        return 1l;
+    public Product createNewProduct(ProductRequest productToCreateRequest) {
+
+
+        Product productcatalogueToUpdate = new Product();
+        productcatalogueToUpdate.setId(new ObjectId());
+        productcatalogueToUpdate.setReferencia(productcatalogueToUpdate.getReferencia());
+        productcatalogueToUpdate.setNombre(productToCreateRequest.getNombre());
+        Family fp = productToCreateRequest.getFamiliaProduto();
+        fp.setId(new ObjectId());
+        fp.setReferencia(fp.getReferencia());
+        productcatalogueToUpdate.setFamiliaProduto(fp);
+        productcatalogueToUpdate.setPrecioBase(productToCreateRequest.getPrecioBase());
+
+        if (productToCreateRequest.getCustomization() != null) {
+            productcatalogueToUpdate.setDetallePersonalizacion(productToCreateRequest.getCustomization().getDetallePersonalizacion());
+            productcatalogueToUpdate.setPrecioPersonalizacion(productToCreateRequest.getCustomization().getPrecioPersonalizacion());
+            productcatalogueToUpdate.setNombrePersonalizacion(productToCreateRequest.getCustomization().getNombrePersonalizacion());
+        }
+
+
+        List<Slogan> lstSlogan =  productToCreateRequest.getLstSlogan();
+        if (lstSlogan != null) {
+            lstSlogan.forEach(s -> {
+                s.setId(new ObjectId());
+                s.setIdentificador(s.getIdentificador());
+                s.getFamilia().setId(new ObjectId());
+                s.getFamilia().setReferencia(s.getFamilia().getReferencia());
+
+            });
+        }
+
+        productcatalogueToUpdate.setLstSlogan(lstSlogan);
+
+
+        List<Media> lstMedia = productToCreateRequest.getListMedia();
+        if (lstMedia != null) {
+
+            lstMedia.forEach(m -> {
+                m.setId(new ObjectId());
+                m.setIdentificador(m.getIdentificador());
+            });
+        }
+
+        productcatalogueToUpdate.setListMedia(lstMedia);
+
+        productcatalogueToUpdate.setDescripcion(productToCreateRequest.getDescripcion());
+
+        Stock stk = productToCreateRequest.getStock();
+        if (stk != null) {
+            stk.setId(new ObjectId());
+            stk.setFechaLlegada(productToCreateRequest.getStock().getFechaLlegada());
+            stk.setHayStock(stk.getHayStock());
+            stk.setStockDisponible(stk.getStockDisponible());
+            stk.setLstStorage(stk.getLstStorage());
+            if (stk.getLstStorage() != null ) {
+                stk.getLstStorage().forEach(storage -> {
+                    storage.setId(new ObjectId());
+                });
+            }
+        }
+        productcatalogueToUpdate.setStock(stk);
+
+
+        return repository.save(productcatalogueToUpdate);
+
     }
 
     public List<Product> getAllProducts() {

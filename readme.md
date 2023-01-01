@@ -67,7 +67,7 @@
 ###How to make a valid Requests to MicroServices (main and replications)
 > Port: 9191 -> port of api-gateway
 > Port: 8080 -> port of microservices  - behind api-gateway
-> 
+
     Example: GET 
         http://localhost:9191/api/catalogue/product
     result:

@@ -73,6 +73,11 @@ public class CatalogueService {
         return productService.updateProduct(id,productToUpdateRequest);
     }
 
+    @Transactional
+    public Product createProduct(ProductRequest productToUpdateRequest) {
+        return productService.createNewProduct(productToUpdateRequest);
+    }
+
     public void deleteFamilyById(String id) {
       familyService.deleteFamilyById(id);
     }
