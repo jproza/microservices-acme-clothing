@@ -40,19 +40,26 @@
 ####How to build docker image per module:
 
     docker login (Optional step)
-    cd api-gateway (folder)
-    run : docker build -t jproza/api-gateway .
+
     cd discovery-server (folder)
     run: docker build -t jproza/discovery-server .
+
+    cd api-gateway (folder)
+    run : docker build -t jproza/acme-api-gateway .
+
     cd acme-clothing-app (folder)
     run: docker build -t jproza/acme-clothing .
 
 ####How to push image into docker per module:
 
     use and run:
-    docker push jproza/acme-clothing
-    docker push jproza/api-gateway
+
+    
     docker push jproza/discovery-server
+
+    docker push jproza/acme-api-gateway
+
+    docker push jproza/acme-clothing
 
 
 ###Docker Compose - Init the app modules/services
