@@ -2,7 +2,9 @@ package ar.com.challenge.acme.clothing.services;
 
 import ar.com.challenge.acme.clothing.entities.*;
 import ar.com.challenge.acme.clothing.ex.EntityNotFoundException;
+import ar.com.challenge.acme.clothing.repository.FamilyRepository;
 import ar.com.challenge.acme.clothing.repository.ProductRepository;
+import ar.com.challenge.acme.clothing.repository.StockRepository;
 import ar.com.challenge.acme.clothing.reqres.ProductRequest;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,13 @@ public class ProductService {
 
     @Autowired
     private ProductRepository repository;
+
+    @Autowired
+    private FamilyRepository familyRepository;
+
+    @Autowired
+    private StockRepository stockRepository;
+
 
     public void save(Product product) {
         repository.save(product);
@@ -37,6 +46,7 @@ public class ProductService {
         Family fp = productToCreateRequest.getFamiliaProduto();
         fp.setId(new ObjectId());
         fp.setReferencia(fp.getReferencia());
+        familyRepository.save(fp);
         productcatalogueToUpdate.setFamiliaProduto(fp);
         productcatalogueToUpdate.setPrecioBase(productToCreateRequest.getPrecioBase());
 
@@ -88,6 +98,7 @@ public class ProductService {
             }
         }
         productcatalogueToUpdate.setStock(stk);
+        stockRepository.save(stk);
 
 
         return repository.save(productcatalogueToUpdate);

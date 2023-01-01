@@ -38,7 +38,6 @@ public class DefaultInitializer implements CommandLineRunner {
     stockRepository.deleteAll();
 
 
-
     Product product = new Product();
     product.setNombre("Stanley Classic");
     product.setReferencia(product.getReferencia());

@@ -8,7 +8,7 @@ spring:
     baseUrl: http://localhost:9411
     sender:
       # web, rabbit, activemq or kafka
-      type: rabbit
+      type: web
   sleuth:
     sampler:
       probability: 1.0
