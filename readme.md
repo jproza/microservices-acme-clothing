@@ -1,7 +1,10 @@
+# Author:
+> Javier Prozapas - jproza@gmail.com
 # Hexagonal Microservices architecture for Acme-Clothing-app
 
 > API-REST Microservices with Spring Cloud Stack and multiple modules.
-> 
+
+
 > Diagram
 >   ![img_1.png](img_1.png)
 
@@ -77,13 +80,17 @@
 ###How to make a valid Requests to MicroServices (main and replications)
 > Port: 9191 -> port of api-gateway
 > Port: 8080 -> port of microservices  - behind api-gateway
+(please! use postman collections.)
 
+    
     Example: GET 
         http://localhost:9191/api/catalogue/product
     result:
         retrieve All products from the catalogue.
     
     Replication all endpoints over:
+        http://localhost:9191/api/catalogue/replica**
+    Example: GET
         http://localhost:9191/api/catalogue/replica/product
         ....
         
