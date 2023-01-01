@@ -1,6 +1,9 @@
 # Hexagonal Microservices architecture for Acme-Clothing-app
 
 > API-REST Microservices with Spring Cloud Stack and multiple modules.
+> 
+> Diagram
+>   ![img_1.png](img_1.png)
 
 ### Specs and Technologies
 
