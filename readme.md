@@ -63,6 +63,15 @@
 
 ![img.png](img.png)
 
+###How to make a valid Requests to MicroServices
+> Port: 9191 -> port of api-gateway
+> Port: 8080 -> port of microservices  - behind api-gateway
+> 
+    Example: GET 
+        http://localhost:9191/api/catalogue/product
+    result:
+        retrieve All products from the catalogue.
+        
 
 
     
