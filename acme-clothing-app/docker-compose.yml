@@ -44,6 +44,19 @@ services:
       - main-network
     command: ["--bind_ip", "0.0.0.0"]
 
+  discovery-server:
+    build:
+      ##context: ..
+      dockerfile: discovery-server/Dockerfile
+    image: jproza/discovery-server
+    container_name: discovery
+    restart: on-failure
+    ports:
+      - 8761:8761
+    environment:
+      - SERVER_PORT=8761
+    networks:
+      - main-network
 
   api-gateway:
     build:
@@ -62,20 +75,6 @@ services:
       - 9191:9191
     environment:
       - SERVER_PORT=9191
-    networks:
-      - main-network
-
-  discovery-server:
-    build:
-      ##context: ..
-      dockerfile: discovery-server/Dockerfile
-    image: jproza/discovery-server
-    container_name: discovery
-    restart: on-failure
-    ports:
-      - 8761:8761
-    environment:
-      - SERVER_PORT=8761
     networks:
       - main-network
 
