@@ -1,43 +1,68 @@
-# Hexagonal Microservices architecture for Acme-Clothing
+# Hexagonal Microservices architecture for Acme-Clothing-app
 
-> API-REST Microservices with Spring Cloud Stack and  multiple modules.
+> API-REST Microservices with Spring Cloud Stack and multiple modules.
 
 ### Specs and Technologies
 
 - **Java 11**
-- **https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/**
-- sudo chown -R `id -un` /opt/homebrew/var/mongodb
+- **MongoDB**
+- **Spring Cloud**
+- **Api Gateway**
+- **Eureka**
+- **Docker compose**
+- **Circuitbreaker**
+- **RabbitMQ**
+- **Sleuth/Zipkin**
+- **Lombok**
+- **Postman Collections**
+
+###Pre requirements
+* Install and run Mongo db server (with sufficient privileges. eg: in db path).
+* Install Docker 
+* Install Docker compose
 
 
-run in order:
+###Roll out in order
  - Discovery-server
  - api-gateway
  - acme-clothing-app
+ 
+
+####How to build entire project (package):
+    
+    (run build.sh) under /usr/local/javierprozapas/proyectos/microservices-acme-clothing folder.
+    use:
+    ./build.sh
+
+###Docker
+
+####How to build docker image per module:
+
+    docker login (Optional step)
+    cd api-gateway (folder)
+    run : docker build -t jproza/api-gateway .
+    cd discovery-server (folder)
+    run: docker build -t jproza/discovery-server .
+    cd acme-clothing-app (folder)
+    run: docker build -t jproza/acme-clothing-app .
+
+####How to push image into docker per module:
+
+    use and run:
+    docker push jproza/acme-clothing-app
+    docker push jproza/api-gateway
+    docker push jproza/discovery-server
 
 
-https://access.redhat.com/documentation/en-us/red_hat_container_development_kit/3.0/html/installation_guide/docker-machine-driver-install
+###Docker Compose - Init the app modules/services
+    run: docker compose in  acme-clothing-app folder
+    use: docker-compose up
 
-as manual installation
-brew services restart mongodb-community
-.build
-docker
-docker login
-docker build -t jproza/acme-api-gateway .
-docker build -t jproza/acme-api-gateway .
-docker build -t jproza/acme-api-gateway .
+###PostMan 
+> Collections in acme-clothing-API.postman_collection.json
 
-docker push jproza/acme-clothing
-brew install --cask docker
-(https://stackoverflow.com/questions/44084846/cannot-connect-to-the-docker-daemon-on-macos)
-docker build -t jproza/acme-clothing .
-
-docker push jproza/acme-clothing
+![img.png](img.png)
 
 
-brew install --cask virtualbox
 
-https://www.linkedin.com/pulse/get-started-spring-boot-mongodb-docker-compose-saeid-farahi/
-
-docker-compose --env-file /usr/local/javierprozapas/proyectos/microservices-acme-clothing/acme-clothing-app/.env build
-
-docker run --mount source=data,destination=/opt/homebrew/var/mongodb jproza/acme-clothing
+    

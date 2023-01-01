@@ -22,7 +22,7 @@ services:
 
   web:
     build:
-      context: ..
+      #context: ..
       dockerfile: acme-clothing-app/Dockerfile
     image: jproza/acme-clothing
     container_name: acme-clothing
@@ -47,7 +47,7 @@ services:
 
   api-gateway:
     build:
-      context: ..
+      ##context: ..
       dockerfile: api-gateway/Dockerfile
     image: jproza/acme-api-gateway
     container_name: api-gateway
@@ -67,7 +67,7 @@ services:
 
   discovery-server:
     build:
-      context: ..
+      ##context: ..
       dockerfile: discovery-server/Dockerfile
     image: jproza/discovery-server
     container_name: discovery

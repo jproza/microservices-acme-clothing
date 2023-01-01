@@ -16,7 +16,7 @@ RUN useradd -G normalgroup normaluser
 USER normaluser:normalgroup
 
 # run app
-ARG JAR_FILE=api-gateway/target/*.jar
+ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 
 #VOLUME /opt/homebrew/var/mongodb

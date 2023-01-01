@@ -18,12 +18,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue/product",
+					"raw": "http://localhost:9191/api/catalogue/product",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9191",
 					"path": [
 						"api",
 						"catalogue",
@@ -101,7 +101,7 @@
 			"response": []
 		},
 		{
-			"name": "7. Get All Families",
+			"name": "4. Get All Families",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -129,7 +129,7 @@
 			"response": []
 		},
 		{
-			"name": "8. Get All Families ById",
+			"name": "5. Get All Families ById",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -140,7 +140,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue/family/63b028e6cdaec17586635a9f",
+					"raw": "http://localhost:8080/api/catalogue/family/63b078fd5c5ec943a56bbe82",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -150,14 +150,14 @@
 						"api",
 						"catalogue",
 						"family",
-						"63b028e6cdaec17586635a9f"
+						"63b078fd5c5ec943a56bbe82"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "4. Create a new Family",
+			"name": "6. Create a new Family",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -169,7 +169,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\": \"Calzado\"\n}",
+					"raw": "{\n    \"nombre\": \"Ropa niños\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -193,7 +193,7 @@
 			"response": []
 		},
 		{
-			"name": "5. Update a Family",
+			"name": "7. Update a Family",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -205,7 +205,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\":\"Familia24\"\n}",
+					"raw": "{\n    \"nombre\":\"Ropa Niños per\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -213,7 +213,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue/family/63b02947cdaec17586635aa0",
+					"raw": "http://localhost:8080/api/catalogue/family/63b079395c5ec943a56bbe8b",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -223,14 +223,14 @@
 						"api",
 						"catalogue",
 						"family",
-						"63b02947cdaec17586635aa0"
+						"63b079395c5ec943a56bbe8b"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "6. Update Product set new Family",
+			"name": "8. Update Product set new Family",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -267,7 +267,7 @@
 			"response": []
 		},
 		{
-			"name": "7. Delete Family ById",
+			"name": "9. Delete Family ById",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -278,7 +278,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/catalogue/family/63b029a8cdaec17586635aa1",
+					"raw": "http://localhost:8080/api/catalogue/family/63b079395c5ec943a56bbe8b",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -288,14 +288,14 @@
 						"api",
 						"catalogue",
 						"family",
-						"63b029a8cdaec17586635aa1"
+						"63b079395c5ec943a56bbe8b"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "7. Get all Stock  By Storage Contains a name Copy",
+			"name": "10. Get all Stock  By Storage Contains a name Copy",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -327,7 +327,7 @@
 			"response": []
 		},
 		{
-			"name": "7. Get all Stock  By Product name",
+			"name": "11. Get all Stock  By Product name",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -360,7 +360,7 @@
 			"response": []
 		},
 		{
-			"name": "5. Update a Product Stock",
+			"name": "12. Update a Product Stock",
 			"request": {
 				"method": "PUT",
 				"header": [
