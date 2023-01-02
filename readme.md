@@ -24,6 +24,7 @@
 - **Postman Collections**
 
 ###Pre requirements
+* Tested in IntelliJ > 2022.1.3 or later is needed
 * Install and run Mongo db server (with sufficient privileges. eg: in db path).
 * Install Docker 
 * Install Docker compose
